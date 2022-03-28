@@ -5,4 +5,5 @@ CompileFlags:
     -Wextra,
     -I../include,
     -I/goinfre/swaegene/homebrew/include,
+    -I/usr/local/include,
   ]
