@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/03/30 22:26:14 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/30 22:31:00 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	agrand_diagram_to_img(t_state *state, t_img *img);
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 t_img	*generate_new_image(void *mlx);
-void	update_frame(t_state *state, void (f)(t_state *, t_img *));
+void	update_img(t_state *state, void (f)(t_state *, t_img *));
 
 t_complex	coord_to_cplx(t_coord coord, t_state *state);
 t_coord	cplx_to_coord(t_complex cplx, t_state *state);

@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:20:12 by seb               #+#    #+#             */
-/*   Updated: 2022/03/30 22:22:50 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/30 22:30:46 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_img	*generate_new_image(void *mlx)
 	return (img);
 }
 
-void	update_frame(t_state *state, void (f)(t_state *, t_img *))
+void	update_img(t_state *state, void (f)(t_state *, t_img *))
 {
 	t_img	*img;
 

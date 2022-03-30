@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:23:18 by seb               #+#    #+#             */
-/*   Updated: 2022/03/30 22:23:40 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/30 22:30:51 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	mouse_button_hook(int button, int x, int y, void *param)
 		if (!work)
 		{
 			work = 1;
-			update_frame(state, mandelbrot_set_to_img);
+			update_img(state, mandelbrot_set_to_img);
 			work = 0;
 		}
 	}
