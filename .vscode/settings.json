@@ -1,3 +1,10 @@
 {
-	"makefile.extensionOutputFolder": "./.vscode"
+	"makefile.extensionOutputFolder": "./.vscode",
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/home/seb/42/fract-ol",
+			"binaryPath": "/home/seb/42/fract-ol/fractol",
+			"binaryArgs": []
+		}
+	]
 }
