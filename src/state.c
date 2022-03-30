@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/30 22:25:53 by seb              ###   ########.fr       */
+/*   Created: 2022/03/30 22:24:59 by seb               #+#    #+#             */
+/*   Updated: 2022/03/30 22:25:22 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 #include <mlx.h>
 
-int	main(void)
+t_state	init_state(void)
 {
 	t_state	state;
 
-	state = init_state();
-	update_frame(&state, mandelbrot_set_to_img);
-	mlx_mouse_hook(state.win, mouse_button_hook, &state);
-	mlx_loop(state.mlx);
+	state.img = NULL;
+	state.zoom = 0.8;
+	state.center.x = 0;
+	state.center.y = 0;
+	state.mlx = mlx_init();
+	state.win = mlx_new_window(state.mlx, WIDTH, HEIGHT, "fract-ol");
+	return (state);
 }
