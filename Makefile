@@ -3,14 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+         #
+#    By: seb <seb@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 13:49:18 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/28 13:51:40 by swaegene         ###   ########.fr        #
+#    Updated: 2022/03/30 09:28:10 by seb              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
+
+UNAME_S := $(shell uname -s)
 
 RM = rm -f
 MKDIR = mkdir
@@ -29,7 +31,13 @@ endif
 CC = gcc
 CFLAGS += -Wall -Wextra -Werror
 CPPFLAGS += -I../include
+
+ifeq ($(UNAME_S),Linux)
+LDFLAGS += -lmlx -lXext -lX11
+endif
+ifdef ($(UNAME_S),Darwin)
 LDFLAGS += -lmlx -framework OpenGL -framework AppKit -lz
+endif
 
 SRCS = main.c
 OBJS = $(addprefix $(OUT_DIR),$(SRCS:%.c=%.o))
