@@ -5,6 +5,11 @@
 			"cwd": "/home/seb/42/fract-ol",
 			"binaryPath": "/home/seb/42/fract-ol/fractol",
 			"binaryArgs": []
+		},
+		{
+			"cwd": "/Users/seb/42/fract-ol",
+			"binaryPath": "/Users/seb/42/fract-ol/fractol",
+			"binaryArgs": []
 		}
 	]
 }

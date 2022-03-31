@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:23:18 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 12:02:29 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 13:27:37 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	render_next_frame_hook(void *param)
 	if (state->mlx)
 	{
 		argand_diagram_to_img(state, state->img);
-		mlx_mouse_get_pos(state->mlx, state->win, &x, &y);
+		mlx_mouse_get_pos(state->win, &x, &y);
 		mouse_move_hook(x, y, param);
 	}
 	return (0);

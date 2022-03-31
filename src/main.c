@@ -6,17 +6,18 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/31 12:02:43 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 13:33:37 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 #include <mlx.h>
+#include <stdlib.h>
 
 int	close_window(t_state *state)
 {
 	mlx_destroy_window(state->mlx, state->win);
-	state->mlx = NULL;
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 

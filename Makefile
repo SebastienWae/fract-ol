@@ -6,7 +6,7 @@
 #    By: seb <seb@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 13:49:18 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/31 09:24:26 by seb              ###   ########.fr        #
+#    Updated: 2022/03/31 13:28:44 by seb              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,13 @@ endif
 
 CC = gcc
 CFLAGS += -Wall -Wextra -Werror
-CPPFLAGS += -I./include
+CPPFLAGS += -I./include -I./minilibx
 
 ifeq ($(UNAME_S),Linux)
 LDFLAGS += -lmlx -lXext -lX11 -lm
 endif
-ifdef ($(UNAME_S),Darwin)
-LDFLAGS += -lmlx -framework OpenGL -framework AppKit -lz -lm
+ifeq ($(UNAME_S),Darwin)
+LDFLAGS += -L./minilibx -lmlx -framework OpenGL -framework AppKit -lz -lm 
 endif
 
 SRCS = main.c mlx.c state.c hooks.c fractals.c complex.c debug.c
