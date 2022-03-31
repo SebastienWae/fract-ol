@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:20:12 by seb               #+#    #+#             */
-/*   Updated: 2022/03/30 22:30:46 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 11:37:21 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,6 @@ t_img	*generate_new_image(void *mlx)
 
 void	update_img(t_state *state, void (f)(t_state *, t_img *))
 {
-	t_img	*img;
-
-	img = generate_new_image(state->mlx);
-	f(state, img);
-	mlx_put_image_to_window(state->mlx, state->win, img->img, 0, 0);
-	if (state->img)
-	{
-		mlx_destroy_image(state->mlx, state->img->img);
-		free(state->img);
-	}
-	state->img = img;
+	f(state, state->img);
+	mlx_put_image_to_window(state->mlx, state->win, state->img->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:16:35 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 11:09:30 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 11:33:16 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	mandelbrot_set_to_img(t_state *state, t_img *img)
 			z.r = 0;
 			z.i = 0;
 			iter = 0;
-			while (z.r * z.r + z.i * z.i < 2 && iter < MAX_ITERATION)
+			while (z.r * z.r + z.i * z.i < 4 && iter < MAX_ITERATION)
 			{
 				tmp_z_r = z.r * z.r - z.i * z.i + c.r;
 				z.i = 2 * z.r * z.i + c.i;
@@ -46,5 +46,4 @@ void	mandelbrot_set_to_img(t_state *state, t_img *img)
 		coord.y = 0;
 		coord.x++;
 	}
-	argand_diagram_to_img(state, img);
 }

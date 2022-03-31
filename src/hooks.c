@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:23:18 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 11:05:54 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 12:02:29 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	mouse_button_hook(int button, int x, int y, void *param)
 {
 	t_state	*state;
 
+	(void)x;
+	(void)y;
 	state = (t_state*)param;
 	if (button == SCROLL_DOWN)
 		state->zoom -= .1;
@@ -25,7 +27,6 @@ int	mouse_button_hook(int button, int x, int y, void *param)
 	if (button == SCROLL_DOWN || button == SCROLL_UP)
 	{
 		update_img(state, state->f);
-		mouse_move_hook(x, y, param);
 	}
 	return (0);
 }
@@ -58,3 +59,18 @@ int	mouse_move_hook(int x, int y, void *param)
 	return (0);
 }
 
+int	render_next_frame_hook(void *param)
+{
+	t_state		*state;
+	int			x;	
+	int			y;	
+
+	state = (t_state*)param;
+	if (state->mlx)
+	{
+		argand_diagram_to_img(state, state->img);
+		mlx_mouse_get_pos(state->mlx, state->win, &x, &y);
+		mouse_move_hook(x, y, param);
+	}
+	return (0);
+}

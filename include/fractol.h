@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 11:07:13 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 11:26:09 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 #define WIDTH 800
 #define HEIGHT 800
-#define MAX_ITERATION 100
+#define MAX_ITERATION 50
 
 enum e_event {
 	ON_KEYDOWN = 2,
@@ -84,6 +84,7 @@ t_coord		cplx_to_coord(t_complex cplx, t_state *state);
 
 int	mouse_button_hook(int button, int x, int y, void *param);
 int	mouse_move_hook(int x, int y, void *param);
+int	render_next_frame_hook(void *param);
 
 t_state	init_state(t_render_func f);
 
