@@ -6,17 +6,19 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:21:11 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 15:47:29 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 16:48:12 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 
-double	linear_interpol(double a, double b, double t)
-{
-	return (a * (1 - t) + b * t);
-}
-
+/**
+ * @brief convert a coord to a complex number
+ * 
+ * @param coord 
+ * @param state 
+ * @return t_complex 
+ */
 t_complex	coord_to_cplx(t_coord coord, t_state *state)
 {
 	t_complex	cmplx;
@@ -31,6 +33,13 @@ t_complex	coord_to_cplx(t_coord coord, t_state *state)
 	return (cmplx);
 }
 
+/**
+ * @brief convert a complex number to a coord
+ * 
+ * @param cplx 
+ * @param state 
+ * @return t_coord 
+ */
 t_coord	cplx_to_coord(t_complex cplx, t_state *state)
 {
 	t_coord		coord;

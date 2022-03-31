@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:20:12 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 11:37:21 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 16:42:53 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,37 @@
 #include <mlx.h>
 #include <stdlib.h>
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+/**
+ * @brief put pixel in image img at coord (x, y) with color c
+ * 
+ * @param img
+ * @param x
+ * @param y
+ * @param c color in format 0xRRGGBB
+ */
+void	pixel_put(t_img *img, int x, int y, int c)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
+	*(unsigned int*)dst = c;
 }
 
-t_img	*generate_new_image(void *mlx)
+/**
+ * @brief create a new image 
+ * 
+ * @param mlx 
+ * @return t_img* 
+ */
+t_img	*new_image(void *mlx)
 {
 	t_img	*img;
 
 	img = malloc(sizeof(t_img));
+	if (!img)
+		return (NULL);
 	img->img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel),
 								&(img->line_length), &(img->endian));
 	return (img);
-}
-
-void	update_img(t_state *state, void (f)(t_state *, t_img *))
-{
-	f(state, state->img);
-	mlx_put_image_to_window(state->mlx, state->win, state->img->img, 0, 0);
 }

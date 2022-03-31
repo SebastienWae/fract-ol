@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/31 14:08:28 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 17:13:32 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,36 @@
 #include <mlx.h>
 #include <stdlib.h>
 
-int	close_window(t_state *state)
+/**
+ * @brief free allocated memory and quit the program
+ * 
+ * @param state 
+ * @return int 
+ */
+int	quit(t_state *state)
 {
-	mlx_destroy_window(state->mlx, state->win);
+	destroy_state(state);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
 
-int	main(void)
+/**
+ * @brief entry point of the program
+ * 
+ * @param argc 
+ * @param argv 
+ * @return int 
+ */
+int	main(int argc, char **argv)
 {
 	t_state	state;
 
+	(void)argc;
+	(void)argv;
 	state = init_state(mandelbrot_set_to_img);
-	mlx_mouse_hook(state.win, mouse_button_hook, &state);
-	mlx_hook(state.win, ON_DESTROY, 0, close_window, &state);
+	mlx_hook(state.win, ON_DESTROY, 0, quit, &state);
+	mlx_mouse_hook(state.win, mouse_handler, &state);
+	mlx_key_hook(state.win, key_handler, &state);
 	mlx_loop_hook(state.mlx, render_next_frame_hook, &state);
 	mlx_loop(state.mlx);
 }

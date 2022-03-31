@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:16:35 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 11:33:16 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 16:35:24 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	mandelbrot_set_to_img(t_state *state, t_img *img)
 				iter++;
 			}
 			if (iter == MAX_ITERATION)
-				my_mlx_pixel_put(img, coord.x, coord.y, 0x00FFFFFF);
+				pixel_put(img, coord.x, coord.y, 0x00FFFFFF);
 			else
-				my_mlx_pixel_put(img, coord.x, coord.y, iter);
+				pixel_put(img, coord.x, coord.y, iter);
 			coord.y++;
 		}
 		coord.y = 0;
