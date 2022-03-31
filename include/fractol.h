@@ -6,24 +6,18 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 17:38:21 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 20:08:26 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#define NULL (void *)0
+# define WIDTH 800
+# define HEIGHT 600
+# define MAX_ITERATION 50
 
-// TODO: remove
-#define max(a,b) (((a) (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-
-#define WIDTH 800
-#define HEIGHT 600
-#define MAX_ITERATION 50
-
-enum e_event {
+enum e_events {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
 	ON_MOUSEDOWN = 4,
@@ -32,15 +26,13 @@ enum e_event {
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
 };
-
-enum e_mouse_button {
+enum e_mouse_buttons {
 	LEFT_BUTTON = 1,
 	RIGHT_BUTTON = 2,
 	MIDDLE_BUTTON = 3,
 	SCROLL_UP = 4,
 	SCROLL_DOWN = 5
 };
-
 enum e_keys {
 	KEY_MINUS = 45,
 	KEY_PLUS = 61,
@@ -55,57 +47,52 @@ enum e_keys {
 	KEY_DOWN = 65364,
 };
 
-typedef struct	s_img {
-	void	*img;
+typedef struct s_img {
 	char	*addr;
 	int		bits_per_pixel;
-	int		line_length;
 	int		endian;
-}				t_img;
-
+	int		line_length;
+	void	*img;
+}	t_img;
 typedef struct s_complex {
 	double	r;
 	double	i;
-}				t_complex;
-
+}	t_complex;
 typedef struct s_coord {
 	int		x;
 	int		y;
-}				t_coord;
-
-typedef struct s_state t_state;
-
-typedef void	(*t_render_func)(t_state *, t_img *);
+}	t_coord;
+typedef struct s_state	t_state;
+typedef void			(*t_render_func)(t_state *, t_img *);
 struct s_state {
+	double			zoom;
+	int				debug;
+	int				outdated;
+	t_coord			center;
+	t_img			*img;
+	t_render_func	f;
 	void			*mlx;
 	void			*win;
-	t_img			*img;
-	double			zoom;
-	t_coord			center;
-	t_render_func	f;
-	int				outdated;
-	int				debug;
 };
 
-int	quit(t_state *state);
+int			quit(t_state *state);
 
-void	mandelbrot_set_to_img(t_state *state, t_img *img);
+void		mandelbrot_set_to_img(t_state *state, t_img *img);
 
-void	argand_diagram_to_img(t_state *state, t_img *img);
-void	display_debug_info(t_state *state);
+void		argand_diagram_to_img(t_state *state, t_img *img);
+void		display_debug_info(t_state *state);
 
-void	pixel_put(t_img *data, int x, int y, int color);
-t_img	*new_image(void *mlx);
+void		put_pixel(t_img *data, int x, int y, int color);
+t_img		*new_image(void *mlx);
 
 t_complex	coord_to_cplx(t_coord coord, t_state *state);
 t_coord		cplx_to_coord(t_complex cplx, t_state *state);
 
-int	mouse_handler(int button, int x, int y, void *param);
-int	key_handler(int keycode, void *param);
-int	mouse_move_hook(int x, int y, void *param);
-int	render_next_frame_hook(void *param);
+int			mouse_handler(int button, int x, int y, void *param);
+int			key_handler(int keycode, void *param);
+int			loop_handler(void *param);
 
-t_state	init_state(t_render_func f);
-void	destroy_state(t_state *state);
+t_state		init_state(t_render_func f);
+void		destroy_state(t_state *state);
 
 #endif

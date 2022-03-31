@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/31 17:13:32 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 20:00:12 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ int	main(int argc, char **argv)
 	mlx_hook(state.win, ON_DESTROY, 0, quit, &state);
 	mlx_mouse_hook(state.win, mouse_handler, &state);
 	mlx_key_hook(state.win, key_handler, &state);
-	mlx_loop_hook(state.mlx, render_next_frame_hook, &state);
+	mlx_loop_hook(state.mlx, loop_handler, &state);
 	mlx_loop(state.mlx);
 }
