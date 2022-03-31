@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 11:26:09 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 15:47:12 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #define min(a,b) (((a) < (b)) ? (a) : (b))
 
 #define WIDTH 800
-#define HEIGHT 800
+#define HEIGHT 600
 #define MAX_ITERATION 50
 
 enum e_event {
@@ -69,7 +69,7 @@ struct s_state {
 	double			zoom;
 	t_coord			center;
 	t_render_func	f;
-
+	int				outdated;
 };
 
 void	mandelbrot_set_to_img(t_state *state, t_img *img);

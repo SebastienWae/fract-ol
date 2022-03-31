@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/31 13:33:37 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 14:08:28 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(void)
 	t_state	state;
 
 	state = init_state(mandelbrot_set_to_img);
-	update_img(&state, state.f);
 	mlx_mouse_hook(state.win, mouse_button_hook, &state);
 	mlx_hook(state.win, ON_DESTROY, 0, close_window, &state);
 	mlx_loop_hook(state.mlx, render_next_frame_hook, &state);

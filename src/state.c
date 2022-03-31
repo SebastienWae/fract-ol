@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:24:59 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 12:02:08 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 14:08:26 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_state	init_state(t_render_func f)
 	state.win = mlx_new_window(state.mlx, WIDTH, HEIGHT, "fract-ol");
 	state.img = generate_new_image(state.mlx);
 	state.f = f;
+	state.outdated = 1;
 	return (state);
 }

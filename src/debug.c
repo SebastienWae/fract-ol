@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:18:32 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 11:09:46 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 15:20:13 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	argand_diagram_to_img(t_state *state, t_img *img)
 		{
 			cplx = coord_to_cplx(coord, state);
 			if (cplx.r == 0 || cplx.i == 0)
+			{
 				my_mlx_pixel_put(img, coord.x, coord.y, 0x00FF0000);
+			}
 			coord.y++;
 		}
 		coord.y = 0;
