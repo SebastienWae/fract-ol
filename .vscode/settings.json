@@ -10,6 +10,11 @@
 			"cwd": "/Users/seb/42/fract-ol",
 			"binaryPath": "/Users/seb/42/fract-ol/fractol",
 			"binaryArgs": []
+		},
+		{
+			"cwd": "/Users/swaegene/42/fract-ol",
+			"binaryPath": "/Users/swaegene/42/fract-ol/fractol",
+			"binaryArgs": []
 		}
 	]
 }

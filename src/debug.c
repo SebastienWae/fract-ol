@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:18:32 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 11:15:44 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/01 13:24:15 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,12 @@ void	display_debug_info(t_state *state)
 	display_argand_diagram(state);
 	draw_rectangle(state->img, (t_coord){0, 0}, (t_coord){110, 115}, 0x0000FF00);
 
+#ifdef __linux__
 	mlx_mouse_get_pos(state->mlx, state->win, &(mouse.x), &(mouse.y));
+#endif
+#ifdef __APPLE__
+	mlx_mouse_get_pos(state->win, &(mouse.x), &(mouse.y));
+#endif
 	cplx = coord_to_cplx(mouse, 2 * state->zoom);
 	sprintf(x_str, "x: %d", mouse.x);
 	sprintf(y_str, "y: %d", mouse.y);

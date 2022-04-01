@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seb <seb@student.42.fr>                    +#+  +:+       +#+         #
+#    By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 13:49:18 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/31 20:24:47 by seb              ###   ########.fr        #
+#    Updated: 2022/04/01 13:37:14 by swaegene         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ UNAME_S := $(shell uname -s)
 
 RM = rm -f
 MKDIR = mkdir
+MINILIBX_DIR = ./minilibx/
+MINILIBX = minilibx.a
 
 SRC_DIR = ./src/
 
@@ -42,11 +44,14 @@ endif
 SRCS = main.c mlx.c state.c handlers.c fractals.c complex.c debug.c
 OBJS = $(addprefix $(OUT_DIR),$(SRCS:%.c=%.o))
 
-$(NAME): $(DIRS) $(OBJS)
+$(NAME): $(DIRS) $(OBJS) $(MINILIBX)
 	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $@
 
 $(OUT_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@
+
+$(MINILIBX):
+	$(MAKE) -C $(MINILIBX_DIR)
 
 $(DIRS):
 	$(MKDIR) "$@"
