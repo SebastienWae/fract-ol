@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/03/31 20:00:12 by seb              ###   ########.fr       */
+/*   Updated: 2022/03/31 20:24:05 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	state = init_state(mandelbrot_set_to_img);
+	state = init_state(render_mandelbrot_set);
 	mlx_hook(state.win, ON_DESTROY, 0, quit, &state);
 	mlx_mouse_hook(state.win, mouse_handler, &state);
 	mlx_key_hook(state.win, key_handler, &state);

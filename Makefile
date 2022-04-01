@@ -6,7 +6,7 @@
 #    By: seb <seb@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 13:49:18 by swaegene          #+#    #+#              #
-#    Updated: 2022/03/31 13:28:44 by seb              ###   ########.fr        #
+#    Updated: 2022/03/31 20:24:47 by seb              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ ifeq ($(UNAME_S),Darwin)
 LDFLAGS += -L./minilibx -lmlx -framework OpenGL -framework AppKit -lz -lm 
 endif
 
-SRCS = main.c mlx.c state.c hooks.c fractals.c complex.c debug.c
+SRCS = main.c mlx.c state.c handlers.c fractals.c complex.c debug.c
 OBJS = $(addprefix $(OUT_DIR),$(SRCS:%.c=%.o))
 
 $(NAME): $(DIRS) $(OBJS)

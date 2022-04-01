@@ -6,13 +6,13 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:16:35 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 20:09:18 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/01 10:36:44 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 
-void	mandelbrot_set_to_img(t_state *state, t_img *img)
+void	render_mandelbrot_set(t_state *state)
 {
 	double		tmp_z_r;
 	t_coord		coord;
@@ -26,7 +26,7 @@ void	mandelbrot_set_to_img(t_state *state, t_img *img)
 	{
 		while (coord.y < HEIGHT)
 		{
-			c = coord_to_cplx(coord, state);
+			c = coord_to_cplx(coord, 2 * state->zoom);
 			z.r = 0;
 			z.i = 0;
 			iter = 0;
@@ -38,9 +38,9 @@ void	mandelbrot_set_to_img(t_state *state, t_img *img)
 				iter++;
 			}
 			if (iter == MAX_ITERATION)
-				put_pixel(img, coord.x, coord.y, 0x00FFFFFF);
+				put_pixel(state->img, coord, 0x00FFFFFF);
 			else
-				put_pixel(img, coord.x, coord.y, iter);
+				put_pixel(state->img, coord, iter);
 			coord.y++;
 		}
 		coord.y = 0;

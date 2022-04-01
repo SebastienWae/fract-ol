@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:24:59 by seb               #+#    #+#             */
-/*   Updated: 2022/03/31 19:57:33 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/01 09:43:19 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
  */
 void	destroy_state(t_state *state)
 {
-	mlx_destroy_image(state->mlx, state->img->img);
 	mlx_destroy_window(state->mlx, state->win);
 	free(state->img);
 }
@@ -37,13 +36,12 @@ t_state	init_state(t_render_func f)
 	t_state	state;
 
 	state.zoom = 1;
-	state.center.x = 0;
-	state.center.y = 0;
+	state.offset.x = 0;
+	state.offset.y = 0;
 	state.mlx = mlx_init();
 	state.win = mlx_new_window(state.mlx, WIDTH, HEIGHT, "fract-ol");
 	state.img = new_image(state.mlx);
 	state.f = f;
 	state.outdated = 1;
-	state.debug = 0;
 	return (state);
 }
