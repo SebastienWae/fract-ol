@@ -6,12 +6,13 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:18:32 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 13:24:15 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:15:27 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 #include <mlx.h>
+#include <math.h>
 
 //TODO: remove
 #include <stdio.h>
@@ -25,8 +26,8 @@ void	display_debug_info(t_state *state)
 	char		r_str[50];
 	char		i_str[50];
 	char		zoom[50];
-	char		x_offset[50];
-	char		y_offset[50];
+	char		r_offset[50];
+	char		i_offset[50];
 
 	display_argand_diagram(state);
 	draw_rectangle(state->img, (t_coord){0, 0}, (t_coord){110, 115}, 0x0000FF00);
@@ -37,14 +38,14 @@ void	display_debug_info(t_state *state)
 #ifdef __APPLE__
 	mlx_mouse_get_pos(state->win, &(mouse.x), &(mouse.y));
 #endif
-	cplx = coord_to_cplx(mouse, 2 * state->zoom);
+	cplx = coord_to_cplx(mouse, state);
 	sprintf(x_str, "x: %d", mouse.x);
 	sprintf(y_str, "y: %d", mouse.y);
 	sprintf(r_str, "r: %f", cplx.r);
 	sprintf(i_str, "i: %f", cplx.i);
 	sprintf(zoom, "zoom: %f", state->zoom);
-	sprintf(x_offset, "x offset: %d", state->offset.x);
-	sprintf(y_offset, "y offset: %d", state->offset.y);
+	sprintf(r_offset, "r offset: %f", state->offset.r);
+	sprintf(i_offset, "i offset: %f", state->offset.i);
 
 	mlx_put_image_to_window(state->mlx, state->win, state->img->img, 0, 0);
 
@@ -53,8 +54,8 @@ void	display_debug_info(t_state *state)
 	mlx_string_put(state->mlx, state->win, 15, 45, 0x00000000, r_str);
 	mlx_string_put(state->mlx, state->win, 15, 60, 0x00000000, i_str);
 	mlx_string_put(state->mlx, state->win, 15, 75, 0x00000000, zoom);
-	mlx_string_put(state->mlx, state->win, 15, 90, 0x00000000, x_offset);
-	mlx_string_put(state->mlx, state->win, 15, 105, 0x00000000, y_offset);
+	mlx_string_put(state->mlx, state->win, 15, 90, 0x00000000, r_offset);
+	mlx_string_put(state->mlx, state->win, 15, 105, 0x00000000, i_offset);
 }
 
 void	display_argand_diagram(t_state *state)
@@ -69,7 +70,7 @@ void	display_argand_diagram(t_state *state)
 	{
 		while (coord.y < HEIGHT)
 		{
-			cplx = coord_to_cplx(coord, 2 * state->zoom);
+			cplx = coord_to_cplx(coord, state);
 			if (cplx.r == 0 || cplx.i == 0)
 			{
 				put_pixel(state->img, coord, 0x00FF0000);
@@ -84,13 +85,13 @@ void	display_argand_diagram(t_state *state)
 	{
 		cplx.r = i;
 		cplx.i = 0;
-		coord = cplx_to_coord(cplx, 2 * state->zoom);
+		coord = cplx_to_coord(cplx, state);
 		if (coord.x >= 2 && coord.x < WIDTH && coord.y >= 2 && coord.y < HEIGHT)
 			draw_rectangle(state->img, (t_coord){coord.x - 2, coord.y - 2},
 				(t_coord){coord.x + 2, coord.y + 2}, 0x0000FF00);
 		cplx.r = 0;
 		cplx.i = i;
-		coord = cplx_to_coord(cplx, 2 * state->zoom);
+		coord = cplx_to_coord(cplx, state);
 		if (coord.x >= 2 && coord.x < WIDTH && coord.y >= 2 && coord.y < HEIGHT)
 			draw_rectangle(state->img, (t_coord){coord.x - 2, coord.y - 2},
 				(t_coord){coord.x + 2, coord.y + 2}, 0x0000FF00);

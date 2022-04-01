@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 10:35:05 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/01 17:44:20 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIDTH 800
-# define HEIGHT 800
-# define MAX_ITERATION 50
+# define WIDTH 800.
+# define HEIGHT 800.
+# define SCALE 2.
+# define MAX_ITERATION 200
 
+enum e_zoom_dir {
+	ZOOM_IN,
+	ZOOM_OUT
+};
 enum e_events {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -34,16 +39,16 @@ enum e_mouse_buttons {
 	SCROLL_DOWN = 5
 };
 enum e_keys {
-	KEY_MINUS = 45,
-	KEY_PLUS = 61,
+	KEY_MINUS = 27,
+	KEY_PLUS = 24,
 	KEY_B = 98,
 	KEY_J = 106,
 	KEY_M = 109,
-	KEY_ESC = 65307,
-	KEY_LEFT = 65361,
-	KEY_UP = 65362,
-	KEY_RIGHT = 65363,
-	KEY_DOWN = 65364,
+	KEY_ESC = 53,
+	KEY_LEFT = 123,
+	KEY_UP = 126,
+	KEY_RIGHT = 124,
+	KEY_DOWN = 125,
 };
 
 typedef struct s_img {
@@ -65,10 +70,11 @@ typedef struct s_state	t_state;
 typedef void			(*t_render_func)(t_state *);
 struct s_state {
 	double			zoom;
-	int				outdated;
-	t_coord			offset;
+	int				step;
+	int				redraw;
+	t_complex		offset;
 	t_img			*img;
-	t_render_func	f;
+	t_render_func	render_func;
 	void			*mlx;
 	void			*win;
 };
@@ -84,8 +90,8 @@ void		draw_rectangle(t_img *img, t_coord start, t_coord end, int color);
 void		put_pixel(t_img *data, t_coord coord, int color);
 t_img		*new_image(void *mlx);
 
-t_complex	coord_to_cplx(t_coord coord, double scale);
-t_coord		cplx_to_coord(t_complex cplx, double scale);
+t_complex	coord_to_cplx(t_coord coord, t_state *state);
+t_coord		cplx_to_coord(t_complex cplx, t_state *state);
 
 int			mouse_handler(int button, int x, int y, void *param);
 int			key_handler(int keycode, void *param);
@@ -93,5 +99,9 @@ int			loop_handler(void *param);
 
 t_state		init_state(t_render_func f);
 void		destroy_state(t_state *state);
+
+int			i_to_color(int nb);
+
+void		zoom(enum e_zoom_dir dir, t_state *state);
 
 #endif

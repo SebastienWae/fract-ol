@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractals.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:16:35 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 10:36:44 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/01 16:36:32 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	render_mandelbrot_set(t_state *state)
 	{
 		while (coord.y < HEIGHT)
 		{
-			c = coord_to_cplx(coord, 2 * state->zoom);
+			c = coord_to_cplx(coord, state);
 			z.r = 0;
 			z.i = 0;
 			iter = 0;
@@ -37,10 +37,7 @@ void	render_mandelbrot_set(t_state *state)
 				z.r = tmp_z_r;
 				iter++;
 			}
-			if (iter == MAX_ITERATION)
-				put_pixel(state->img, coord, 0x00FFFFFF);
-			else
-				put_pixel(state->img, coord, iter);
+			put_pixel(state->img, coord, i_to_color(iter));
 			coord.y++;
 		}
 		coord.y = 0;
