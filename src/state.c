@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:24:59 by seb               #+#    #+#             */
-/*   Updated: 2022/04/02 11:59:34 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/02 12:18:21 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_state	init_state(t_render_func f)
 {
 	t_state	s;
 
-	s.step = 0;
+	s.steps = 0;
 	s.offset.r = 0.5;
 	s.offset.i = 0.;
 	s.factor.r = (SCALE * 2) / HEIGHT;

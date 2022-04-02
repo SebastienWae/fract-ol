@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/04/02 11:52:41 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/02 12:18:50 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ typedef struct s_coord {
 typedef struct s_state	t_state;
 typedef void			(*t_render_func)(t_state *);
 struct s_state {
-	int				step;
-	int				redraw;
+	int				steps;
 	double			zoom;
+	int				redraw;
 	t_complex		offset;
 	t_complex		factor;
 	t_img			*img;
@@ -102,5 +102,6 @@ void		destroy_state(t_state *state);
 int			i_to_color(int nb);
 
 void		zoom(enum e_zoom_dir dir, t_state *state);
+double		zoom_interpolation(int steps);
 
 #endif
