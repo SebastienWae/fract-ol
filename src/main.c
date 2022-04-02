@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/04/01 15:03:38 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/02 11:59:10 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
  * @param state 
  * @return int 
  */
-int	quit(t_state *state)
+int	quit(t_state *s)
 {
-	destroy_state(state);
+	destroy_state(s);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -36,14 +36,14 @@ int	quit(t_state *state)
  */
 int	main(int argc, char **argv)
 {
-	t_state	state;
+	t_state	s;
 
 	(void)argc;
 	(void)argv;
-	state = init_state(render_mandelbrot_set);
-	mlx_hook(state.win, ON_DESTROY, 0, quit, &state);
-	mlx_mouse_hook(state.win, mouse_handler, &state);
-	mlx_key_hook(state.win, key_handler, &state);
-	mlx_loop_hook(state.mlx, loop_handler, &state);
-	mlx_loop(state.mlx);
+	s = init_state(render_mandelbrot_set);
+	mlx_hook(s.win, ON_DESTROY, 0, quit, &s);
+	mlx_mouse_hook(s.win, mouse_handler, &s);
+	mlx_key_hook(s.win, key_handler, &s);
+	mlx_loop_hook(s.mlx, loop_handler, &s);
+	mlx_loop(s.mlx);
 }

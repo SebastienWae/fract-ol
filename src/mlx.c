@@ -6,38 +6,13 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:20:12 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 10:58:52 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/02 11:49:49 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 #include <mlx.h>
 #include <stdlib.h>
-
-/**
- * @brief draw a rectangle on the image
- * 
- * @param img 
- * @param start	start coordiante of the square
- * @param end 	end coordinate of the square
- * @param c 	color in format 0xAARRGGBB
- */
-void	draw_rectangle(t_img *img, t_coord start, t_coord end, int c)
-{
-	int	y;
-
-	y = start.y;
-	while (start.x <= end.x)
-	{
-		while (start.y <= end.y)
-		{
-			put_pixel(img, start, c);
-			start.y++;
-		}
-		start.y = y;
-		start.x++;
-	}
-}
 
 /**
  * @brief put pixel in image img at coord (x, y) with color c

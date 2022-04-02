@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zoom.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 14:36:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/04/01 17:39:35 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/02 11:59:41 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,34 @@
  * @param dir 	zooming direction
  * @param state 
  */
-void	zoom(enum e_zoom_dir dir, t_state *state)
+void	zoom(enum e_zoom_dir dir, t_state *s)
 {
 	t_coord		mouse;
 	t_complex	cplx;
+	t_complex	cplx2;
 	double		logMinZoom;
 	double		logMaxZoom;
 	double		logZoom;
 	double		zoom;
 
-	mlx_mouse_get_pos(state->win, &(mouse.x), &(mouse.y));
-	cplx = coord_to_cplx(mouse, state);
+	mlx_mouse_get_pos(s->win, &(mouse.x), &(mouse.y));
+	cplx = coord_to_cplx(mouse, s);
 	if (dir == ZOOM_IN)
-	{
-		state->step++;
-		state->offset.r = cplx.r * -1;
-		state->offset.i = cplx.i * -1;
-	}
-	else if (dir == ZOOM_OUT && state->zoom > 1)
-		state->step--;
+		s->step++;
+	else if (dir == ZOOM_OUT && s->zoom > 1)
+		s->step--;
+	else if (dir == ZOOM_RESET)
+		s->step = 0;
 	logMinZoom = log(1.0);
 	logMaxZoom = log(MAXFLOAT);
-	logZoom = logMinZoom + (logMaxZoom - logMinZoom) * state->step / (500 - 1);
+	logZoom = logMinZoom + (logMaxZoom - logMinZoom) * s->step / (MAX_STEPS - 1);
 	zoom = exp(logZoom);
-	state->zoom = zoom;
-	state->redraw = 1;
+	s->zoom = zoom;
+	cplx2 = coord_to_cplx(mouse, s);
+	if (dir == ZOOM_IN)
+	{
+		s->offset.r += (cplx2.r - cplx.r);
+		s->offset.i += (cplx2.i - cplx.i);
+	}
+	s->redraw = 1;
 }

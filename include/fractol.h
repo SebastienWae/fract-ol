@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 17:44:20 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/02 11:52:41 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIDTH 800.
-# define HEIGHT 800.
+# define WIDTH 600.
+# define HEIGHT 600.
 # define SCALE 2.
-# define MAX_ITERATION 200
+# define MAX_ITERATION 100
+# define MAX_STEPS 100
 
 enum e_zoom_dir {
 	ZOOM_IN,
-	ZOOM_OUT
+	ZOOM_OUT,
+	ZOOM_RESET
 };
 enum e_events {
 	ON_KEYDOWN = 2,
@@ -41,6 +43,7 @@ enum e_mouse_buttons {
 enum e_keys {
 	KEY_MINUS = 27,
 	KEY_PLUS = 24,
+	KEY_RETURN = 36,
 	KEY_B = 98,
 	KEY_J = 106,
 	KEY_M = 109,
@@ -69,10 +72,11 @@ typedef struct s_coord {
 typedef struct s_state	t_state;
 typedef void			(*t_render_func)(t_state *);
 struct s_state {
-	double			zoom;
 	int				step;
 	int				redraw;
+	double			zoom;
 	t_complex		offset;
+	t_complex		factor;
 	t_img			*img;
 	t_render_func	render_func;
 	void			*mlx;
@@ -83,15 +87,10 @@ int			quit(t_state *state);
 
 void		render_mandelbrot_set(t_state *state);
 
-void		display_argand_diagram(t_state *state);
-void		display_debug_info(t_state *state);
-
-void		draw_rectangle(t_img *img, t_coord start, t_coord end, int color);
 void		put_pixel(t_img *data, t_coord coord, int color);
 t_img		*new_image(void *mlx);
 
 t_complex	coord_to_cplx(t_coord coord, t_state *state);
-t_coord		cplx_to_coord(t_complex cplx, t_state *state);
 
 int			mouse_handler(int button, int x, int y, void *param);
 int			key_handler(int keycode, void *param);

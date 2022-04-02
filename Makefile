@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+         #
+#    By: seb <seb@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/28 13:49:18 by swaegene          #+#    #+#              #
-#    Updated: 2022/04/01 16:36:01 by swaegene         ###   ########.fr        #
+#    Updated: 2022/04/02 11:10:40 by seb              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ ifeq ($(UNAME_S),Darwin)
 LDFLAGS += -L./minilibx -lmlx -framework OpenGL -framework AppKit -lz -lm 
 endif
 
-SRCS = main.c mlx.c state.c handlers.c fractals.c complex.c zoom.c colors.c debug.c
+SRCS = main.c mlx.c state.c handlers.c fractals.c complex.c zoom.c colors.c
 OBJS = $(addprefix $(OUT_DIR),$(SRCS:%.c=%.o))
 
 $(NAME): $(DIRS) $(OBJS) $(MINILIBX)

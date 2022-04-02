@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:24:59 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 17:36:49 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/02 11:59:34 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
  * 
  * @param state 
  */
-void	destroy_state(t_state *state)
+void	destroy_state(t_state *s)
 {
-	mlx_destroy_window(state->mlx, state->win);
-	free(state->img);
+	mlx_destroy_window(s->mlx, s->win);
+	free(s->img);
 }
 
 /**
@@ -33,16 +33,18 @@ void	destroy_state(t_state *state)
  */
 t_state	init_state(t_render_func f)
 {
-	t_state	state;
+	t_state	s;
 
-	state.zoom = 1;
-	state.step = 1;
-	state.offset.r = 0.;
-	state.offset.i = 0.;
-	state.mlx = mlx_init();
-	state.win = mlx_new_window(state.mlx, WIDTH, HEIGHT, "fract-ol");
-	state.img = new_image(state.mlx);
-	state.render_func = f;
-	state.redraw = 1;
-	return (state);
+	s.step = 0;
+	s.offset.r = 0.5;
+	s.offset.i = 0.;
+	s.factor.r = (SCALE * 2) / HEIGHT;
+	s.factor.i = (SCALE * 2) / WIDTH;
+	s.zoom = 1;
+	s.mlx = mlx_init();
+	s.win = mlx_new_window(s.mlx, WIDTH, HEIGHT, "fract-ol");
+	s.img = new_image(s.mlx);
+	s.render_func = f;
+	s.redraw = 1;
+	return (s);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:23:18 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 16:14:54 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/02 11:58:50 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
  */
 int	mouse_handler(int button, int x, int y, void *param)
 {
-	t_state	*state;
+	t_state	*s;
 
 	(void)x;
 	(void)y;
-	state = (t_state *)param;
+	s = (t_state *)param;
 	if (button == SCROLL_DOWN)
-		zoom(ZOOM_IN, state);
+		zoom(ZOOM_IN, s);
 	else if (button == SCROLL_UP)
-		zoom(ZOOM_OUT, state);
+		zoom(ZOOM_OUT, s);
 	return (0);
 }
 
@@ -45,25 +45,31 @@ int	mouse_handler(int button, int x, int y, void *param)
  */
 int	key_handler(int keycode, void *param)
 {
-	t_state	*state;
+	t_state	*s;
 
-	state = (t_state *)param;
+	s = (t_state *)param;
 	if (keycode == KEY_ESC)
-		quit(state);
+		quit(s);
 	else if (keycode == KEY_PLUS)
-		zoom(ZOOM_IN, state);
+		zoom(ZOOM_IN, s);
 	else if (keycode == KEY_MINUS)
-		zoom(ZOOM_OUT, state);
+		zoom(ZOOM_OUT, s);
 	else if (keycode == KEY_LEFT)
-		state->offset.r += 0.1;
+		s->offset.r += 0.1;
 	else if (keycode == KEY_RIGHT)
-		state->offset.r -= 0.1;
+		s->offset.r -= 0.1;
 	else if (keycode == KEY_UP)
-		state->offset.i += 0.1;
+		s->offset.i += 0.1;
 	else if (keycode == KEY_DOWN)
-		state->offset.i -= 0.1;
+		s->offset.i -= 0.1;
+	else if (keycode == KEY_RETURN)
+	{
+		s->offset.r = 0;
+		s->offset.i = 0;
+		zoom(ZOOM_RESET, s);
+	}
 	if (keycode == KEY_DOWN || keycode == KEY_UP || keycode == KEY_LEFT || keycode == KEY_RIGHT)
-		state->redraw = 1;
+		s->redraw = 1;
 	return (0);
 }
 
@@ -75,19 +81,17 @@ int	key_handler(int keycode, void *param)
  */
 int	loop_handler(void *param)
 {
-	t_state		*state;
+	t_state		*s;
 
-	state = (t_state *)param;
-	if (state->mlx)
+	s = (t_state *)param;
+	if (s->mlx)
 	{
-		if (state->redraw)
+		if (s->redraw)
 		{
-			state->render_func(state);
-			state->redraw = 0;
-			//TODO: uncomment after display debug is remove
-			//mlx_put_image_to_window(state->mlx, state->win, state->img->img, 0, 0);
+			s->render_func(s);
+			s->redraw = 0;
+			mlx_put_image_to_window(s->mlx, s->win, s->img->img, 0, 0);
 		}
-		display_debug_info(state);
 	}
 	return (0);
 }

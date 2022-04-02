@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fractals.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:16:35 by seb               #+#    #+#             */
-/*   Updated: 2022/04/01 16:36:32 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/02 11:58:23 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 
-void	render_mandelbrot_set(t_state *state)
+void	render_mandelbrot_set(t_state *s)
 {
 	double		tmp_z_r;
 	t_coord		coord;
@@ -21,12 +21,11 @@ void	render_mandelbrot_set(t_state *state)
 	int			iter;
 
 	coord.x = 0;
-	coord.y = 0;
 	while (coord.x < WIDTH)
 	{
 		while (coord.y < HEIGHT)
 		{
-			c = coord_to_cplx(coord, state);
+			c = coord_to_cplx(coord, s);
 			z.r = 0;
 			z.i = 0;
 			iter = 0;
@@ -37,7 +36,7 @@ void	render_mandelbrot_set(t_state *state)
 				z.r = tmp_z_r;
 				iter++;
 			}
-			put_pixel(state->img, coord, i_to_color(iter));
+			put_pixel(s->img, coord, i_to_color(iter));
 			coord.y++;
 		}
 		coord.y = 0;
