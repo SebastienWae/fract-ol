@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:20:12 by seb               #+#    #+#             */
-/*   Updated: 2022/04/02 11:49:49 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/02 14:07:24 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param coord
  * @param c	color in format 0xAARRGGBB
  */
-void	put_pixel(t_img *img, t_coord coord, int c)
+void	put_pixel(t_img *img, t_coord coord, unsigned int c)
 {
 	char	*dst;
 

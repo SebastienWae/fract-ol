@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex.c                                          :+:      :+:    :+:   */
+/*   ft_parse_dot_precision.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 22:21:11 by seb               #+#    #+#             */
-/*   Updated: 2022/04/02 17:27:23 by seb              ###   ########.fr       */
+/*   Created: 2022/03/15 16:22:19 by seb               #+#    #+#             */
+/*   Updated: 2022/03/16 17:43:04 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
-#include <math.h>
+#include <ft_flags.h>
 
-/**
- * @brief convert a coordinate to a complex number
- * 
- * @param coord 
- * @param scale 
- * @return t_complex 
- */
-t_complex	coord_to_cplx(t_coord coord, t_state *s)
+void	ft_parse_dot_precision(const char **f, t_f_flags *flags)
 {
-	t_complex	cplx;
-
-	cplx.r = (-SCALE + coord.x * s->factor.r) / s->zoom - s->offset.r;
-	cplx.i = (-SCALE + coord.y * s->factor.i) / s->zoom - s->offset.i;
-	return (cplx);
+	(*f)++;
+	flags->is_precise = 1;
+	flags->dot_precision = ft_get_f_flag_arg(f);
 }

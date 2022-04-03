@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex.c                                          :+:      :+:    :+:   */
+/*   ft_utils.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 22:21:11 by seb               #+#    #+#             */
-/*   Updated: 2022/04/02 17:27:23 by seb              ###   ########.fr       */
+/*   Created: 2022/03/16 12:10:28 by seb               #+#    #+#             */
+/*   Updated: 2022/03/16 12:32:21 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
-#include <math.h>
+#ifndef FT_UTILS_H
+# define FT_UTILS_H
 
-/**
- * @brief convert a coordinate to a complex number
- * 
- * @param coord 
- * @param scale 
- * @return t_complex 
- */
-t_complex	coord_to_cplx(t_coord coord, t_state *s)
-{
-	t_complex	cplx;
+char	*ft_strappend(char *src, char *appendix);
+char	*ft_strprepend(char *src, char *prefix);
 
-	cplx.r = (-SCALE + coord.x * s->factor.r) / s->zoom - s->offset.r;
-	cplx.i = (-SCALE + coord.y * s->factor.i) / s->zoom - s->offset.i;
-	return (cplx);
-}
+char	*ft_dectobase(unsigned long dec, char *base, unsigned int base_size);
+char	*ft_dectohex(unsigned long dec);
+
+char	*ft_utoa(unsigned int nb);
+
+#endif

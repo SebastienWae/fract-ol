@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex.c                                          :+:      :+:    :+:   */
+/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 22:21:11 by seb               #+#    #+#             */
-/*   Updated: 2022/04/02 17:27:23 by seb              ###   ########.fr       */
+/*   Created: 2022/03/12 13:47:11 by swaegene          #+#    #+#             */
+/*   Updated: 2022/03/16 17:54:43 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
-#include <math.h>
+#include <ft_flags.h>
+#include <ft_utils.h>
+#include <libft.h>
+#include <stdarg.h>
 
-/**
- * @brief convert a coordinate to a complex number
- * 
- * @param coord 
- * @param scale 
- * @return t_complex 
- */
-t_complex	coord_to_cplx(t_coord coord, t_state *s)
+int	ft_print_unsigned(va_list ap, t_f_flags flags)
 {
-	t_complex	cplx;
+	unsigned int	u;
+	char			*str;
+	int				len;
 
-	cplx.r = (-SCALE + coord.x * s->factor.r) / s->zoom - s->offset.r;
-	cplx.i = (-SCALE + coord.y * s->factor.i) / s->zoom - s->offset.i;
-	return (cplx);
+	(void)flags;
+	u = va_arg(ap, unsigned);
+	str = ft_utoa(u);
+	len = ft_strlen(str);
+	ft_putstr_fd(str, STDOUT_FILENO);
+	free(str);
+	return (len);
 }

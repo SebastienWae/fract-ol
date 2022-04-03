@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex.c                                          :+:      :+:    :+:   */
+/*   ft_format_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/30 22:21:11 by seb               #+#    #+#             */
-/*   Updated: 2022/04/02 17:27:23 by seb              ###   ########.fr       */
+/*   Created: 2022/03/16 12:09:07 by seb               #+#    #+#             */
+/*   Updated: 2022/03/16 17:40:39 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fractol.h>
-#include <math.h>
+#ifndef FT_FORMAT_BONUS_H
+# define FT_FORMAT_BONUS_H
 
-/**
- * @brief convert a coordinate to a complex number
- * 
- * @param coord 
- * @param scale 
- * @return t_complex 
- */
-t_complex	coord_to_cplx(t_coord coord, t_state *s)
-{
-	t_complex	cplx;
+# include <ft_flags.h>
 
-	cplx.r = (-SCALE + coord.x * s->factor.r) / s->zoom - s->offset.r;
-	cplx.i = (-SCALE + coord.y * s->factor.i) / s->zoom - s->offset.i;
-	return (cplx);
-}
+int	ft_format_insert_char(t_f_flags f);
+int	ft_format_alternate_form(enum e_c_flags c, t_f_flags f);
+int	ft_format_before(enum e_c_flags c, t_f_flags f, unsigned int s);
+int	ft_format_after(t_f_flags f, unsigned int s);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/04/02 11:59:10 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/03 09:43:02 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,23 @@ int	quit(t_state *s)
  */
 int	main(int argc, char **argv)
 {
+	t_args	args;
 	t_state	s;
 
-	(void)argc;
-	(void)argv;
-	s = init_state(render_mandelbrot_set);
-	mlx_hook(s.win, ON_DESTROY, 0, quit, &s);
-	mlx_mouse_hook(s.win, mouse_handler, &s);
-	mlx_key_hook(s.win, key_handler, &s);
-	mlx_loop_hook(s.mlx, loop_handler, &s);
-	mlx_loop(s.mlx);
+	args = parse_args(argc, argv);
+	if (args.render_func)
+	{
+		s = init_state(&args);
+		mlx_hook(s.win, ON_DESTROY, 0, quit, &s);
+		mlx_mouse_hook(s.win, mouse_handler, &s);
+		mlx_key_hook(s.win, key_handler, &s);
+		mlx_loop_hook(s.mlx, loop_handler, &s);
+		mlx_loop(s.mlx);
+		return (0);
+	}
+	else
+	{
+		display_params();
+		return (1);
+	}
 }
