@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 09:30:36 by seb               #+#    #+#             */
-/*   Updated: 2022/04/03 11:27:05 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 09:56:05 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static double	ft_atof(const char *str)
 	return (sign * ((double)left + (double)right / e));
 }
 
-t_args		parse_args(int argv, char **argc)
+t_args	parse_args(int argv, char **argc)
 {
 	t_args	args;
 
@@ -56,8 +56,8 @@ t_args		parse_args(int argv, char **argc)
 		else
 			args.render_func = NULL;
 	}
-	else if (argv == 4 &&
-			ft_strncmp(argc[1], "julia", ft_strlen(argc[1])) == 0)
+	else if (argv == 4
+		&& ft_strncmp(argc[1], "julia", ft_strlen(argc[1])) == 0)
 	{
 		args.render_func = render_julia_set;
 		args.c.r = ft_atof(argc[2]);
@@ -68,7 +68,7 @@ t_args		parse_args(int argv, char **argc)
 	return (args);
 }
 
-void		display_params(void)
+void	display_params(void)
 {
 	ft_printf("USAGE: fractol <fractal> [<args>]\n\n");
 	ft_printf("FRACTALS:\n");

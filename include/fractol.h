@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/04/03 14:44:31 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 10:55:50 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ enum e_keys {
 	KEY_MINUS = 27,
 	KEY_PLUS = 24,
 	KEY_RETURN = 36,
-	KEY_B = 11,
-	KEY_J = 38,
-	KEY_M = 46,
 	KEY_ESC = 53,
 	KEY_LEFT = 123,
 	KEY_UP = 126,
@@ -76,45 +73,42 @@ typedef struct s_args {
 	t_complex		c;
 }	t_args;
 struct s_state {
-	int				steps;
-	double			zoom;
-	int				redraw;
+	int				zoom;
+	double			scale;
 	t_complex		offset;
 	t_complex		factor;
-	t_img			*img;
-	t_render_func	render_func;
 	t_complex		c;
+	unsigned int	color_scale;
+	int				loops;
+	int				redraw;
+	t_render_func	render_func;
 	void			*mlx;
 	void			*win;
-	int				frame;
-	double			freq;
+	t_img			*img;
 };
 
-int			quit(t_state *state);
+int				quit(t_state *state);
 
-void		render_mandelbrot_set(t_state *state);
-void		render_julia_set(t_state *state);
-void		render_newton_set(t_state *state);
+void			render_mandelbrot_set(t_state *state);
+void			render_julia_set(t_state *state);
+void			render_newton_set(t_state *state);
 
-void		put_pixel(t_img *data, t_coord coord, unsigned int color);
-t_img		*new_image(void *mlx);
+void			put_pixel(t_img *data, t_coord coord, unsigned int color);
+t_img			*new_image(void *mlx);
 
-t_complex	coord_to_cplx(t_coord coord, t_state *state);
+double			squared_cplx(t_complex c);
+t_complex		coord_to_cplx(t_coord coord, t_state *state);
 
-t_args		parse_args(int argv, char **argc);
-void		display_params(void);
+t_args			parse_args(int argv, char **argc);
+void			display_params(void);
 
-int			mouse_handler(int button, int x, int y, void *param);
-int			key_handler(int keycode, void *param);
-int			loop_handler(void *param);
+int				mouse_handler(int button, int x, int y, void *param);
+int				key_handler(int keycode, void *param);
+int				loop_handler(void *param);
 
-t_state		init_state(t_args *args);
-void		destroy_state(t_state *state);
+t_state			init_state(t_args *args);
+void			destroy_state(t_state *state);
 
-unsigned int	i_to_color(int nb, double n, t_state * state);
-unsigned int HSVtoARGB(unsigned char hue, unsigned char sat, unsigned char val);
-
-void		zoom(enum e_zoom_dir dir, t_state *state);
-double		zoom_interpolation(int steps);
+void			zoom(enum e_zoom_dir dir, t_state *state);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:23:18 by seb               #+#    #+#             */
-/*   Updated: 2022/04/03 14:46:24 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 10:43:51 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,10 @@ int	key_handler(int keycode, void *param)
 		s->offset.i = 0;
 		zoom(ZOOM_RESET, s);
 	}
-	else if (keycode == KEY_M)
-		s->render_func = render_mandelbrot_set;
-	else if (keycode == KEY_J)
-		s->render_func = render_julia_set;
 	s->redraw = 1;
 	return (0);
 }
 
-#include <stdlib.h>
 /**
  * @brief handle loop ticks
  * 
@@ -90,22 +85,19 @@ int	loop_handler(void *param)
 	s = (t_state *)param;
 	if (s->mlx)
 	{
-		s->frame++;
+		s->loops++;
 		if (s->redraw)
 		{
 			s->render_func(s);
 			s->redraw = 0;
 			mlx_put_image_to_window(s->mlx, s->win, s->img->img, 0, 0);
 		}
-		else if (s->frame == 10)
+		else if (s->loops == 100)
 		{
-			s->freq += 0.002;
-			s->render_func(s);
-			mlx_put_image_to_window(s->mlx, s->win, s->img->img, 0, 0);
-			s->frame = 0;
+			s->color_scale++;
+			s->redraw = 1;
+			s->loops = 0;
 		}
-		if (s->freq > 2)
-			s->freq = 0;
 	}
 	return (0);
 }

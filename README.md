@@ -6,6 +6,8 @@ Computer Graphics Fractals
 - https://en.wikipedia.org/wiki/Complex_number
 - https://en.wikipedia.org/wiki/Julia_set
 - https://en.wikipedia.org/wiki/Mandelbrot_set
+- https://en.wikipedia.org/wiki/Newton_fractal
+- https://krazydad.com/tutorials/makecolors.php
 - https://www.youtube.com/watch?v=NGMRB4O922I
 - https://www.youtube.com/watch?v=oCkQ7WK7vuY
 - https://www.youtube.com/watch?v=7MotVcGvFMg

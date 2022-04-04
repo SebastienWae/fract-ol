@@ -6,7 +6,7 @@
 /*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:24:59 by seb               #+#    #+#             */
-/*   Updated: 2022/04/03 14:20:12 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 10:45:37 by seb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ t_state	init_state(t_args *args)
 {
 	t_state	s;
 
-	s.steps = 0;
+	s.zoom = 1;
+	s.scale = 1;
 	s.offset.r = 0.;
 	s.offset.i = 0.;
 	s.factor.r = (SCALE * 2) / HEIGHT;
 	s.factor.i = (SCALE * 2) / WIDTH;
-	s.frame = 0;
-	s.freq = 0.;
-	s.zoom = 1;
+	s.c = args->c;
+	s.color_scale = 0;
+	s.loops = 0;
+	s.redraw = 1;
+	s.render_func = args->render_func;
 	s.mlx = mlx_init();
 	s.win = mlx_new_window(s.mlx, WIDTH, HEIGHT, "fract-ol");
 	s.img = new_image(s.mlx);
-	s.render_func = args->render_func;
-	s.c = args->c;
-	s.redraw = 1;
 	return (s);
 }
