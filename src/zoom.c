@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zoom.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 14:36:29 by swaegene          #+#    #+#             */
-/*   Updated: 2022/04/04 10:46:32 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 14:50:48 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	zoom(enum e_zoom_dir dir, t_state *s)
 		s->offset.r += (cplx2.r - cplx.r);
 		s->offset.i += (cplx2.i - cplx.i);
 	}
-	else if (dir == ZOOM_OUT && s->zoom > 0)
+	else if (dir == ZOOM_OUT && s->zoom > 1)
 	{
 		s->zoom--;
 		s->scale = zoom_interpolation(s->zoom);

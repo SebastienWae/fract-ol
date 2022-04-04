@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/04/04 10:55:50 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 14:33:18 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# define WIDTH 800.
-# define HEIGHT 800.
+# define WIDTH 800
+# define HEIGHT 800
 # define SCALE 2.
 # define MAX_ITERATION 100
 # define MAX_STEPS 1000
@@ -51,27 +51,42 @@ enum e_keys {
 	KEY_DOWN = 125,
 };
 
-typedef struct s_img {
+typedef struct s_img		t_img;
+typedef struct s_complex	t_complex;
+typedef struct s_coord		t_coord;
+typedef struct s_fractal	t_fractal;
+typedef struct s_args		t_args;
+typedef struct s_state		t_state;
+typedef struct s_pixel		t_pixel;
+typedef t_pixel				(*t_fractal_func)(t_complex, t_state *);
+
+struct s_img {
 	char	*addr;
 	int		bpp;
 	int		endian;
 	int		line_length;
 	void	*img;
-}	t_img;
-typedef struct s_complex {
+};
+struct s_complex {
 	double	r;
 	double	i;
-}	t_complex;
-typedef struct s_coord {
+};
+struct s_coord {
 	int		x;
 	int		y;
-}	t_coord;
-typedef struct s_state	t_state;
-typedef void			(*t_render_func)(t_state *);
-typedef struct s_args {
-	t_render_func	render_func;
+};
+struct s_pixel {
+	unsigned int	iter;
+	double			sqr;
+};
+struct s_fractal {
+	t_pixel			pixels[WIDTH][HEIGHT];
+	t_fractal_func	f;
+};
+struct s_args {
+	t_fractal_func	f;
 	t_complex		c;
-}	t_args;
+};
 struct s_state {
 	int				zoom;
 	double			scale;
@@ -81,17 +96,18 @@ struct s_state {
 	unsigned int	color_scale;
 	int				loops;
 	int				redraw;
-	t_render_func	render_func;
+	int				render;
 	void			*mlx;
 	void			*win;
 	t_img			*img;
+	t_fractal		*fractal;
 };
 
 int				quit(t_state *state);
 
-void			render_mandelbrot_set(t_state *state);
-void			render_julia_set(t_state *state);
-void			render_newton_set(t_state *state);
+t_pixel			mandelbrot(t_complex c, t_state *s);
+t_pixel			julia(t_complex c, t_state *s);
+t_pixel			newton(t_complex c, t_state *s);
 
 void			put_pixel(t_img *data, t_coord coord, unsigned int color);
 t_img			*new_image(void *mlx);
@@ -110,5 +126,10 @@ t_state			init_state(t_args *args);
 void			destroy_state(t_state *state);
 
 void			zoom(enum e_zoom_dir dir, t_state *state);
+
+t_fractal		*new_fractal(t_fractal_func f);
+unsigned int	i_to_color(int iter, double n, t_state *s);
+void			render_fractal(t_state *s);
+void			build_fractal(t_state *s);
 
 #endif

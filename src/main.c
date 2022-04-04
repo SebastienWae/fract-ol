@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:38:15 by swaegene          #+#    #+#             */
-/*   Updated: 2022/04/03 09:43:02 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 13:45:23 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 	t_state	s;
 
 	args = parse_args(argc, argv);
-	if (args.render_func)
+	if (args.f)
 	{
 		s = init_state(&args);
 		mlx_hook(s.win, ON_DESTROY, 0, quit, &s);

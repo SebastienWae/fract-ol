@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   params.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 09:30:36 by seb               #+#    #+#             */
-/*   Updated: 2022/04/04 09:56:05 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 13:46:50 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,21 @@ t_args	parse_args(int argv, char **argc)
 	if (argv == 2)
 	{
 		if (ft_strncmp(argc[1], "mandelbrot", ft_strlen(argc[1])) == 0)
-			args.render_func = render_mandelbrot_set;
+			args.f = mandelbrot;
 		else if (ft_strncmp(argc[1], "newton", ft_strlen(argc[1])) == 0)
-			args.render_func = render_newton_set;
+			args.f = newton;
 		else
-			args.render_func = NULL;
+			args.f = NULL;
 	}
 	else if (argv == 4
 		&& ft_strncmp(argc[1], "julia", ft_strlen(argc[1])) == 0)
 	{
-		args.render_func = render_julia_set;
+		args.f = julia;
 		args.c.r = ft_atof(argc[2]);
 		args.c.i = ft_atof(argc[3]);
 	}
 	else
-		args.render_func = NULL;
+		args.f = NULL;
 	return (args);
 }
 

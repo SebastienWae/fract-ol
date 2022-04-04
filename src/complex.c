@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   complex.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:21:11 by seb               #+#    #+#             */
-/*   Updated: 2022/04/04 10:55:40 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 14:24:46 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
-
-double	squared_cplx(t_complex c)
-{
-	return (c.r * c.r + c.i * c.i);
-}
 
 /**
  * @brief convert a coordinate to a complex number

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seb <seb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:23:18 by seb               #+#    #+#             */
-/*   Updated: 2022/04/04 10:43:51 by seb              ###   ########.fr       */
+/*   Updated: 2022/04/04 14:48:28 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	key_handler(int keycode, void *param)
 		s->offset.i -= 0.01;
 	else if (keycode == KEY_RETURN)
 	{
-		s->offset.r = 0.5;
+		s->offset.r = 0;
 		s->offset.i = 0;
 		zoom(ZOOM_RESET, s);
 	}
@@ -86,17 +86,22 @@ int	loop_handler(void *param)
 	if (s->mlx)
 	{
 		s->loops++;
-		if (s->redraw)
+		if (s->render)
 		{
-			s->render_func(s);
-			s->redraw = 0;
-			mlx_put_image_to_window(s->mlx, s->win, s->img->img, 0, 0);
+			render_fractal(s);
+			s->render = 0;
 		}
-		else if (s->loops == 100)
+		if (s->loops == 500)
 		{
 			s->color_scale++;
-			s->redraw = 1;
+			s->render = 1;
 			s->loops = 0;
+			if (s->redraw)
+			{
+				build_fractal(s);
+				s->redraw = 0;
+				s->render = 1;
+			}
 		}
 	}
 	return (0);
