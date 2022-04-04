@@ -6,7 +6,7 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:14:49 by seb               #+#    #+#             */
-/*   Updated: 2022/04/04 14:33:18 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/04 14:56:47 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,33 +103,25 @@ struct s_state {
 	t_fractal		*fractal;
 };
 
-int				quit(t_state *state);
-
-t_pixel			mandelbrot(t_complex c, t_state *s);
-t_pixel			julia(t_complex c, t_state *s);
-t_pixel			newton(t_complex c, t_state *s);
-
-void			put_pixel(t_img *data, t_coord coord, unsigned int color);
-t_img			*new_image(void *mlx);
-
 double			squared_cplx(t_complex c);
-t_complex		coord_to_cplx(t_coord coord, t_state *state);
-
-t_args			parse_args(int argv, char **argc);
-void			display_params(void);
-
-int				mouse_handler(int button, int x, int y, void *param);
 int				key_handler(int keycode, void *param);
 int				loop_handler(void *param);
-
-t_state			init_state(t_args *args);
-void			destroy_state(t_state *state);
-
-void			zoom(enum e_zoom_dir dir, t_state *state);
-
+int				mouse_handler(int button, int x, int y, void *param);
+int				quit(t_state *state);
+t_args			parse_args(int argv, char **argc);
+t_complex		coord_to_cplx(t_coord coord, t_state *state);
 t_fractal		*new_fractal(t_fractal_func f);
+t_img			*new_image(void *mlx);
+t_pixel			julia(t_complex c, t_state *s);
+t_pixel			mandelbrot(t_complex c, t_state *s);
+t_pixel			newton(t_complex c, t_state *s);
+t_state			init_state(t_args *args);
 unsigned int	i_to_color(int iter, double n, t_state *s);
-void			render_fractal(t_state *s);
 void			build_fractal(t_state *s);
+void			destroy_state(t_state *state);
+void			display_params(void);
+void			put_pixel(t_img *data, t_coord coord, unsigned int color);
+void			render_fractal(t_state *s);
+void			zoom(enum e_zoom_dir dir, t_state *state);
 
 #endif

@@ -6,12 +6,11 @@
 /*   By: swaegene <swaegene@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:16:35 by seb               #+#    #+#             */
-/*   Updated: 2022/04/04 14:48:24 by swaegene         ###   ########.fr       */
+/*   Updated: 2022/04/04 14:57:24 by swaegene         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
-#include <math.h>
 #include <mlx.h>
 
 void	build_fractal(t_state *s)
